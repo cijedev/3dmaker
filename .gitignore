@@ -1,0 +1,38 @@
+# Secrets & env
+.env
+.env.*
+!.env.example
+*.pass
+*.pem
+*.key
+*.htpasswd
+secret_key
+password_hash
+**/admin.password
+
+# Runtime / deps
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.next/
+dist/
+build/
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.log
+uploads/
+data/jobs/
+backups/
+*.bak
+*.bak-*

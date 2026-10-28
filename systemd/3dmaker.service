@@ -1,0 +1,23 @@
+[Unit]
+Description=CIJEs 3DGEN web app
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/3dmaker-web
+EnvironmentFile=/opt/3dmaker-web/.env
+ExecStart=/opt/3dmaker-web/.venv/bin/uvicorn app:app --host ${HOST} --port ${PORT} --proxy-headers --forwarded-allow-ips='*'
+Restart=on-failure
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/3dmaker-web/data
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CIJEs 3DGEN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=3" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="hero">
+      <div class="badge">STL · queue · print</div>
+      <h1>CIJEs 3DGEN</h1>
+      <p class="tagline">Describe what you want to 3D print. We'll queue it and prepare your STL when it's ready.</p>
+    </header>
+
+    <section class="card">
+      <label class="label" for="prompt">Describe what you want to 3D print</label>
+      <textarea
+        id="prompt"
+        maxlength="500"
+        rows="4"
+        placeholder='e.g. "a yoyo", "a phone stand", "a cube"'
+        spellcheck="true"
+      ></textarea>
+      <div class="row">
+        <span class="hint" id="charCount">0 / 500</span>
+        <button type="button" id="generateBtn" class="btn primary">
+          <span class="btn-icon">⬡</span> Generate
+        </button>
+      </div>
+    </section>
+
+    <section class="card status-card" id="statusCard" hidden>
+      <div class="status-head">
+        <span class="status-pill" id="statusPill">queued</span>
+        <code class="job-id" id="jobId"></code>
+      </div>
+      <p class="status-msg" id="statusMsg">Waiting in queue…</p>
+      <div id="progressWrap" hidden>
+        <div class="progress det" id="progress">
+          <div class="progress-bar" id="progressBar" style="width:0%"></div>
+        </div>
+        <div class="progress-meta"><span id="progressPct">0%</span><span id="elapsed">0:00 elapsed</span></div>
+      </div>
+      <div class="actions">
+        <a id="downloadBtn" class="btn success" hidden href="#">Download STL</a>
+        <button type="button" id="viewBtn" class="btn ghost" hidden>View 3D</button>
+        <button type="button" id="resetBtn" class="btn ghost">New prompt</button>
+      </div>
+    </section>
+
+    <p class="footnote">
+      Your model is prepared by the CIJEs 3DGEN assistant and appears here when ready.
+    </p>
+  </main>
+  <div class="modal" id="viewerModal" hidden role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 id="viewerTitle">Your model is ready!</h2>
+        <button type="button" class="modal-x" id="viewerClose" aria-label="Close">✕</button>
+      </div>
+      <div class="viewer" id="viewer"><div class="viewer-loading" id="viewerLoading">Loading model…</div></div>
+      <p class="viewer-hint">Drag to rotate · scroll to zoom · right-drag to pan</p>
+      <div class="actions"><a id="modalDownload" class="btn success" href="#">Download STL</a>
+      <button type="button" class="btn ghost" id="viewerClose2">Close</button></div>
+    </div>
+  </div>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+  <script src="app.js?v=3"></script>
+  <script type="module" src="viewer.js?v=3"></script>
+</body>
+</html>
